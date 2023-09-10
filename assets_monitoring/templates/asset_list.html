@@ -1,26 +1,24 @@
 {% extends 'base.html' %}
 
+{% block page_title %}My assets{% endblock %}
 {% block content %}
 <div class="assets-container">
-    <h2>Your Assets</h2>
     <div class="asset-list">
         {% for ownership in assets_ownerships %}
         <div class="asset-item">
             <div class="asset-header">
-                {{ ownership.asset.ticker }}
-                <span class="asset-price">Min: {{ ownership.min_price }} | Max: {{ ownership.max_price }}</span>
+                <span> {{ ownership.asset.ticker }} </span>
+                <span class="asset-price">R$ {{ ownership.asset.current_price|default:"-" }}</span>
             </div>
             <div class="asset-details">
-                <p class="asset-interval">Update Interval: {{ ownership.update_interval_minutes }} min</p>
-                <p class="asset-price">Current Price: {{ ownership.asset.current_price|default:"-" }}</p>
-                <p class="asset-last-update">Last Update: {{ ownership.asset.last_update|default:"-" }}</p>
+                <p>Update Interval: {{ ownership.update_interval_minutes }} min</p>
+                <p>Last Update: {{ ownership.asset.last_update|default:"-" }}</p>
+                <p>Min: R${{ ownership.min_price }} | Max: R${{ ownership.max_price }}</p>
             </div>
-            <div class="asset-actions">
-                <form method="post" action="{% url 'ownership_delete' ownership.asset.ticker %}">
-                    {% csrf_token %}
-                    <button type="submit" class="delete-ownership-button">Delete</button>
-                </form>
-            </div>
+            <form method="post"  class="my-form" action="{% url 'ownership_delete' ownership.asset.ticker %}">
+                {% csrf_token %}
+                <button type="submit" class="delete-ownership-button">Delete</button>
+            </form>
         </div>
         {% endfor %}
     </div>
@@ -28,8 +26,4 @@
         <a class="add-asset-link" href="{% url 'ownership_register' %}">Add New Asset</a>
     </button>
 </div>
-<form class="logout-form" method="post" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <button class="logout-button" type="submit">Logout</button>
-</form>
 {% endblock %}

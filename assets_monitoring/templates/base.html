@@ -5,9 +5,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Assets monitoring</title>
 </head>
 <body>
+    <div class="top-bar">
+        <div>
+            {% block page_title %}Assets monitoring{% endblock %}
+        </div>
+        {% if user.is_authenticated %}
+            <form method="post" class="my-form" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button class="logout-button" type="submit">Logout</button>
+            </form>
+        {% endif %}
+    </div>
     <div class="content">
         {% block content %}{% endblock %}
     </div>

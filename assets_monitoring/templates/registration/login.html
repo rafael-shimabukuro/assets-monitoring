@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %}Login{% endblock %}
+{% block page_title %}Login{% endblock %}
 
 {% block content %}
-  <h2>Login</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Login</button>
+    <div class = "button-container">
+    <button type="submit" class="blue-button">Login</button>
+    <button type="button" class="blue-button" onclick="window.location.href='{% url 'register' %}'">Register</button></div>
   </form>
 {% endblock %}

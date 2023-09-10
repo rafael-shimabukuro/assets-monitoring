@@ -1,9 +1,22 @@
 {% extends 'base.html' %}
+
+{% block page_title %}Register asset{% endblock %}
+
 {% block content %}
-<h2>Register Asset</h2>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Registrar</button>
+    {{ form.ticker.label_tag }}
+    {{ form.ticker }}
+    <br>
+    {{ form.min_price.label_tag }}
+    {{ form.min_price }}
+    <br>
+    {{ form.max_price.label_tag }}
+    {{ form.max_price }}
+    <br>
+    {{ form.update_interval_minutes.label_tag }}
+    {{ form.update_interval_minutes }}
+    <br>
+    <button type="submit" class="add-asset-button">Registrar</button>
 </form>
 {% endblock %}

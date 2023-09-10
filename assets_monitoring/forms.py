@@ -6,11 +6,11 @@ from .models import Asset, AssetOwnership
 
 
 class AssetRegistrationForm(forms.ModelForm):
+    ticker = forms.CharField(max_length=10, required=False)
+
     class Meta:
         model = AssetOwnership
         fields = ['min_price', 'max_price', 'update_interval_minutes']
-
-    ticker = forms.CharField(max_length=10, required=False)
 
     def clean_ticker(self):
         ticker = self.cleaned_data['ticker']
