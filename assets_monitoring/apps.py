@@ -10,7 +10,6 @@ class AssetsMonitoringConfig(AppConfig):
     name = 'assets_monitoring'
 
     def ready(self):
-        print("bomdia")
         from . import scheduler
         if settings.SCHEDULER_AUTOSTART:
             scheduler.startAppScheduler()
